@@ -16,7 +16,8 @@ interface PrivateSlot {
      *
      * @param object An object.
      * @returns The current value of the private slot.
-     * @throws This method will throw an error if object is not an Object, is null, or does not have the private slot defined.
+     * @throws This method will throw an error if object is not an Object, is null, or does not
+     *      have the private slot defined.
      */
     getValue(object: Object): any;
 
@@ -25,7 +26,8 @@ interface PrivateSlot {
      *
      * @param object An object.
      * @param value The value.
-     * @returns True if the object has the private slot defined and the value was set successfully; otherwise, false.
+     * @returns True if the object has the private slot defined and the value was set
+     *      successfully; otherwise, false.
      * @throws This method will throw an error if object is not an Object or is null.
      */
     setValue(object: Object, value: any): boolean;
@@ -41,12 +43,13 @@ interface ClassMirror extends Mirror {
     /**
      * Gets the members of a class.
      *
-     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is "declaration".
+     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is
+     * "declaration".
      *
      * @param filter Options used to filter members.
      * @returns An Iterable of members that match the provided filter.
      */
-    getMembers(filter?: ClassMemberFilter): Iterable<MemberLikeMirror>;
+    getMembers(filter?: ClassMemberFilter): Iterable<ClassMemberLikeMirror>;
 
     /**
      * Defines an opaque private slot.

@@ -3,7 +3,8 @@
 
 interface ParameterMirror extends DeclarationMirror {
     /**
-     * Gets a value indicating whether the provided metadata key exists. (Inherited from DeclarationMirror)
+     * Gets a value indicating whether the provided metadata key exists. (Inherited from
+     *  DeclarationMirror)
      *
      * @param key The metadata key.
      * @param filter Options used to filter results.

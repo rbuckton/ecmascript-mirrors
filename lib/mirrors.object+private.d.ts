@@ -6,12 +6,13 @@ interface ObjectMirror extends Mirror {
     /**
      * Gets the members of a class.
      *
-     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is "declaration".
+     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is
+     * "declaration".
      *
      * @param filter Options used to filter members.
      * @returns An Iterable of members that match the provided filter.
      */
-    getMembers(filter?: ClassMemberFilter): Iterable<MemberLikeMirror>;
+    getMembers(filter?: ClassMemberFilter): Iterable<ClassMemberLikeMirror>;
 
     /**
      * Defines an opaque private slot.

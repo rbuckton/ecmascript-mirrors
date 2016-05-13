@@ -2,7 +2,11 @@
 
 /** A Mirror for a function declaration or function expression. */
 interface FunctionMirror extends DeclarationMirror {
-    /** Gets the kind of mirror this represents. For a FunctionMirror this is always "function". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For a FunctionMirror this is always "function".
+     */
     readonly kind: "function";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -33,7 +37,8 @@ interface FunctionMirror extends DeclarationMirror {
      * Constructs a new object using the underlying function as a constructor.
      *
      * @param argumentsList The arguments to use for the function invocation.
-     * @param newTarget An optional target to use as the "new.target" binding for the function invocation.
+     * @param newTarget An optional target to use as the "new.target" binding for the function
+     *      invocation.
      * @returns The result of invoking the underlying function as a constructor.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */

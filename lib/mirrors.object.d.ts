@@ -2,7 +2,11 @@
 
 /** A Mirror for an object literal or value. */
 interface ObjectMirror extends Mirror {
-    /** Gets the kind of mirror this represents. For an ObjectMirror this is always "object". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For an ObjectMirror this is always "object".
+     */
     readonly kind: "object";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -42,7 +46,8 @@ interface ObjectMirror extends Mirror {
     /**
      * Gets the members of an object.
      *
-     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is "declaration".
+     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is
+     * "declaration".
      *
      * @param filter Options used to filter members.
      * @returns An Iterable of members that match the provided filter.
@@ -142,7 +147,8 @@ interface ObjectMemberFilter {
      * Indicates whether to only include own members.
      *
      * If true, only own members will be included.
-     * If false or undefined, own members will be unioned with members defined on the prototype chain.
+     * If false or undefined, own members will be unioned with members defined on the prototype
+     * chain.
      */
     own?: boolean,
 

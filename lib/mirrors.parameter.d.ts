@@ -2,7 +2,11 @@
 
 /** A Mirror for a parameter. */
 interface ParameterMirror extends DeclarationMirror {
-    /** Gets the kind of mirror this represents. For a ParameterMirror this is always "parameter". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For a ParameterMirror this is always "parameter".
+     */
     readonly kind: "parameter";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */

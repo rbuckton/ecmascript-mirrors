@@ -8,8 +8,10 @@ declare namespace Reflect {
      * Gets a mirror for the target.
      *
      * @param target The target of the mirror.
-     * @param usage The intended usage for the mirror, either a read-only introspection mirror or a writable mutation mirror. Default "mutation".
-     * @returns null or undefined, respectively, if target is either null or undefined; otherwise, a mirror for the provided target.
+     * @param usage The intended usage for the mirror, either a read-only introspection mirror or
+     *      a writable mutation mirror. Default "mutation".
+     * @returns null or undefined, respectively, if target is either null or undefined; otherwise,
+     *      a mirror for the provided target.
      */
     function mirror(target: any, usage?: MirrorUsage): TopLevelMirror | undefined | null;
 }
@@ -88,7 +90,11 @@ type ClassMemberLikeMirror = MemberMirror | MethodMirror | AccessorMirror | Prop
 
 /** A Mirror for a class declaration or class expression. */
 interface ClassMirror extends DeclarationMirror {
-    /** Gets the kind of mirror this represents. For a ClassMirror this is always "class". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For a ClassMirror this is always "class".
+     */
     readonly kind: "class";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -130,7 +136,8 @@ interface ClassMirror extends DeclarationMirror {
      * @param filter Options used to filter members.
      * @returns An Iterable of members that match the provided filter.
      *
-     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is "declaration".
+     * Members whose names are PrivateSlot objects will only be returned if the mirror's state is
+     * "declaration".
      */
     getMembers(filter?: ClassMemberFilter): Iterable<ClassMemberLikeMirror>;
 
@@ -184,7 +191,8 @@ interface ClassMirror extends DeclarationMirror {
      * Creates an instance of the provided class.
      *
      * @param argumentsList The arguments to use for the function invocation.
-     * @param newTarget An optional target to use as the "new.target" binding for the function invocation.
+     * @param newTarget An optional target to use as the "new.target" binding for the function
+     *      invocation.
      * @returns The result of instantiating a new instance of the underlying class.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */
@@ -258,7 +266,10 @@ interface ClassMemberDeleteFilter {
 
 /** A Mirror for the constructor of a class. */
 interface ConstructorMirror extends DeclarationMirror {
-    /** Gets the kind of mirror this represents. For a ConstructorMirror this is always "constructor". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     * For a ConstructorMirror this is always "constructor".
+     */
     readonly kind: "constructor";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -273,7 +284,8 @@ interface ConstructorMirror extends DeclarationMirror {
     /**
      * Gets or sets the underlying function for the constructor.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
@@ -282,7 +294,8 @@ interface ConstructorMirror extends DeclarationMirror {
      * Creates an instance of the provided class.
      *
      * @param argumentsList The arguments to use for the function invocation.
-     * @param newTarget An optional target to use as the "new.target" binding for the function invocation.
+     * @param newTarget An optional target to use as the "new.target" binding for the function
+     *      invocation.
      * @returns The result of instantiating a new instance of the underlying class.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */
@@ -314,14 +327,16 @@ interface MemberMirror extends DeclarationMirror {
     /**
      * Gets or sets a value indicating whether the method is enumerable.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     enumerable: boolean;
 
     /**
      * Gets or sets a value indicating whether the method is configurable.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     configurable: boolean;
 
@@ -338,7 +353,11 @@ interface MemberMirror extends DeclarationMirror {
 
 /** A Mirror for a method defined on a class or object. */
 interface MethodMirror extends MemberMirror {
-    /** Gets the kind of mirror this represents. For a MethodMirror this is always "method". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For a MethodMirror this is always "method".
+     */
     readonly kind: "method";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -350,40 +369,50 @@ interface MethodMirror extends MemberMirror {
     /** Gets the parent ClassMirror for this method. (Inherited from MemberMirror) */
     readonly parent: MemberParentMirror;
 
-    /** Gets a value indicating whether the method is a static member of the class. (Inherited from MemberMirror) */
+    /**
+     * Gets a value indicating whether the method is a static member of the class. (Inherited
+     * from MemberMirror)
+     * */
     readonly static: boolean;
 
     /**
-     * Gets or sets a value indicating whether the method is enumerable. (Inherited from PropertyLikeMirror)
+     * Gets or sets a value indicating whether the method is enumerable. (Inherited from
+     * MemberMirror)
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     enumerable: boolean;
 
     /**
-     * Gets or sets a value indicating whether the method is configurable. (Inherited from PropertyLikeMirror)
+     * Gets or sets a value indicating whether the method is configurable. (Inherited from
+     * MemberMirror)
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     configurable: boolean;
 
     /**
      * Gets or sets a value indicating whether the method is writable.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     writable: boolean;
 
     /**
      * Gets or sets the underlying function for the method.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
 
     /**
-     * Gets the member this method shadows on its superclass, if one exists. (Inherited from PropertyLikeMirror)
+     * Gets the member this method shadows on its superclass, if one exists. (Inherited from
+     * MemberMirror)
      */
     getShadowedMember(): MemberMirror | undefined;
 
@@ -405,7 +434,11 @@ interface MethodMirror extends MemberMirror {
 
 /** A Mirror for a property defined on a class or object. */
 interface PropertyMirror extends MemberMirror {
-    /** Gets the kind of mirror this represents. For a DataPropertyMirror this is always "property". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For a PropertyMirror this is always "property".
+     */
     readonly kind: "property";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -417,39 +450,49 @@ interface PropertyMirror extends MemberMirror {
     /** Gets the parent ClassMirror for this property. (Inherited from MemberMirror) */
     readonly parent: MemberParentMirror;
 
-    /** Gets a value indicating whether the property is a static member of the class. (Inherited from MemberMirror) */
+    /**
+     * Gets a value indicating whether the property is a static member of the class. (Inherited
+     * from MemberMirror)
+     */
     readonly static: boolean;
 
     /**
-     * Gets or sets a value indicating whether the property is enumerable. (Inherited from PropertyLikeMirror)
+     * Gets or sets a value indicating whether the property is enumerable. (Inherited from
+     * MemberMirror)
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     enumerable: boolean;
 
     /**
-     * Gets or sets a value indicating whether the property is configurable. (Inherited from PropertyLikeMirror)
+     * Gets or sets a value indicating whether the property is configurable. (Inherited from
+     * MemberMirror)
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     configurable: boolean;
 
     /**
      * Gets or sets a value indicating whether the property is writable.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     writable: boolean;
 
     /**
      * Gets or sets the underlying value for the property.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     value: any;
 
     /**
-     * Gets the member this property shadows on its superclass, if one exists. (Inherited from PropertyLikeMirror)
+     * Gets the member this property shadows on its superclass, if one exists. (Inherited from
+     *      MemberMirror)
      */
     getShadowedMember(): MemberMirror | undefined;
 
@@ -461,7 +504,11 @@ interface PropertyMirror extends MemberMirror {
 
 /** A Mirror for an accessor defined on a class. */
 interface AccessorMirror extends MemberMirror {
-    /** Gets the kind of mirror this represents. For an AccessorMirror this is always "accessor". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For an AccessorMirror this is always "accessor".
+     */
     readonly kind: "accessor";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -473,7 +520,10 @@ interface AccessorMirror extends MemberMirror {
     /** Gets the parent ClassMirror for this method. (Inherited from MemberMirror) */
     readonly parent: MemberParentMirror;
 
-    /** Gets a value indicating whether the method is a static member of the class. (Inherited from MemberMirror) */
+    /**
+     * Gets a value indicating whether the method is a static member of the class. (Inherited
+     * from MemberMirror)
+     */
     readonly static: boolean;
 
     /** Gets a value indicating whether the accessor has a get method. */
@@ -489,21 +539,26 @@ interface AccessorMirror extends MemberMirror {
     readonly set: SetterMirror | undefined;
 
     /**
-     * Gets or sets a value indicating whether the accessor is enumerable. (Inherited from PropertyLikeMirror)
+     * Gets or sets a value indicating whether the accessor is enumerable. (Inherited from
+     * MemberMirror)
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     enumerable: boolean;
 
     /**
-     * Gets or sets a value indicating whether the accessor is configurable. (Inherited from PropertyLikeMirror)
+     * Gets or sets a value indicating whether the accessor is configurable. (Inherited from
+     * MemberMirror)
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      */
     configurable: boolean;
 
     /**
-     * Gets the member this accessor shadows on its superclass, if one exists. (Inherited from PropertyLikeMirror)
+     * Gets the member this accessor shadows on its superclass, if one exists. (Inherited from
+     * MemberMirror)
      */
     getShadowedMember(): MemberMirror | undefined;
 
@@ -535,7 +590,11 @@ interface AccessorMirror extends MemberMirror {
 
 /** A Mirror for a getter defined on a class. */
 interface GetterMirror extends DeclarationMirror {
-    /** Gets the kind of mirror this represents. For a GetterMirror this is always "get". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For a GetterMirror this is always "get".
+     */
     readonly kind: "get";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -553,7 +612,8 @@ interface GetterMirror extends DeclarationMirror {
     /**
      * Gets or sets the underlying function for the get method.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
@@ -576,7 +636,11 @@ interface GetterMirror extends DeclarationMirror {
 
 /** A Mirror for a setter defined on a class. */
 interface SetterMirror extends DeclarationMirror {
-    /** Gets the kind of mirror this represents. For a SetterMirror this is always "set". (Inherited from Mirror) */
+    /**
+     * Gets the kind of mirror this represents. (Inherited from Mirror)
+     *
+     * For a SetterMirror this is always "set".
+     */
     readonly kind: "set";
 
     /** Gets the state of the mirror. (Inherited from Mirror) */
@@ -594,7 +658,8 @@ interface SetterMirror extends DeclarationMirror {
     /**
      * Gets or sets the underlying function for the set method.
      *
-     * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the mirror's current state is not
+     *      "declaration".
      * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
@@ -635,13 +700,22 @@ interface MemberDescriptor {
 
 /** A descriptor used to define a method on a class or object. */
 interface MethodDescriptor extends MemberDescriptor {
-    /** A value indicating whether the method is a static member of the class. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the method is a static member of the class. Default false.
+     * (Inherited from MemberDescriptor)
+     */
     static?: boolean;
 
-    /** A value indicating whether the method is enumerable. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the method is enumerable. Default false. (Inherited from
+     * MemberDescriptor)
+     */
     enumerable?: boolean;
 
-    /** A value indicating whether the method is configurable. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the method is configurable. Default false. (Inherited from
+     * MemberDescriptor)
+     */
     configurable?: boolean;
 
     /** A value indicating whether the method is writable. Default false. */
@@ -654,13 +728,21 @@ interface MethodDescriptor extends MemberDescriptor {
 /** A descriptor used to define a get or set accessor on a class or object. */
 interface AccessorDescriptor extends MemberDescriptor {
     /**
-     * A value indicating whether the accessor is a static member of the class. Default false. (Inherited from MemberDescriptor) */
+     * A value indicating whether the accessor is a static member of the class. Default false.
+     * (Inherited from MemberDescriptor)
+     */
     static?: boolean;
 
-    /** A value indicating whether the accessor is enumerable. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the accessor is enumerable. Default false. (Inherited from
+     * MemberDescriptor)
+     */
     enumerable?: boolean;
 
-    /** A value indicating whether the accessor is configurable. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the accessor is configurable. Default false. (Inherited from
+     * MemberDescriptor)
+     */
     configurable?: boolean;
 
     /** The underlying function for the getter. */
@@ -672,13 +754,22 @@ interface AccessorDescriptor extends MemberDescriptor {
 
 /** A descriptor used to define a data property on a class or object. */
 interface DataDescriptor extends MemberDescriptor {
-    /** A value indicating whether the property is a static member of the class. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the property is a static member of the class. Default false.
+     * (Inherited from MemberDescriptor)
+     */
     static?: boolean;
 
-    /** A value indicating whether the data property is enumerable. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the data property is enumerable. Default false. (Inherited from
+     * MemberDescriptor)
+     */
     enumerable?: boolean;
 
-    /** A value indicating whether the data property is configurable. Default false. (Inherited from MemberDescriptor) */
+    /**
+     * A value indicating whether the data property is configurable. Default false. (Inherited
+     * from MemberDescriptor)
+     */
     configurable?: boolean;
 
     /** A value indicating whether the data property is writable. Default false. */
