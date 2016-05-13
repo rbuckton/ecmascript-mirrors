@@ -53,13 +53,14 @@ interface Mirror {
      *
      * When a mirror is in the "declaration" state, the underlying target for the mirror does not
      * yet have a runtime value. Any method or property that directly interacts with the runtime
-     * value will likely throw an error.
+     * value will throw an error unless otherwise specified.
+     *
+     * When a mirror is in the "mutation" state, any method that would directly modify the
+     * underlying declaration will throw an error unless otherwise specified.
      *
      * When a mirror is in the "introspection" state, any method or property that would directly
-     * mutate the runtime value will likely throw an error.
-     *
-     * When a mirror is in the "mutation" state, any method that would directly mutate the
-     * declaration will likely throw an error.
+     * modify the runtime value or the underlying declaration will throw an error unless otherwise
+     * specified.
      */
     readonly state: MirrorState;
 
