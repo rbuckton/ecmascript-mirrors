@@ -42,8 +42,9 @@ interface FieldMirror extends MemberMirror {
      * Gets or sets an initializer to evaluate when the field is initialized.
      *
      * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the value is not a function, undefined, or null.
      */
-    initializer: Function | undefined;
+    initializer: Function | undefined | null;
 
     /**
      * Gets the member this field shadows on its superclass, if one exists. (Inherited from MemberMirror)

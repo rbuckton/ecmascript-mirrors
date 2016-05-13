@@ -57,7 +57,7 @@ interface SetterMirror extends DeclarationMirror {
 //
 // Extensions
 //
-// Forward declarations for future extensions to the core proposal.
+// Forward declarations for future extensions to this proposal.
 
 /** Extended function-like mirror types reserved for future proposals. */
 type ExtendedFunctionLikeMirrors = FunctionMirror;

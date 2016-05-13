@@ -173,7 +173,7 @@ interface ObjectMemberDeleteFilter {
 //
 // Extensions
 //
-// Forward declarations for future extensions to the core proposal.
+// Forward declarations for future extensions to this proposal.
 
 /** Extended member mirror kinds reserved for future proposals. */
 type ExtendedObjectMemberKinds = "private";

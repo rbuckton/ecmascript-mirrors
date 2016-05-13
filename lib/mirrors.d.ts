@@ -83,7 +83,7 @@ type MemberKind = "method" | "accessor" | "property" | ExtendedMemberKinds;
 type MemberParentMirror = ClassMirror | ExtendedMemberParentMirrorTypes;
 
 /** The known subtypes of MemberMirror */
-type MemberLikeMirror = MemberMirror | MethodMirror | AccessorMirror | PropertyMirror | ExtendedMemberLikeMirrors;
+type ClassMemberLikeMirror = MemberMirror | MethodMirror | AccessorMirror | PropertyMirror | ExtendedMemberLikeMirrors;
 
 /** A Mirror for a class declaration or class expression. */
 interface ClassMirror extends DeclarationMirror {
@@ -100,7 +100,7 @@ interface ClassMirror extends DeclarationMirror {
     readonly classConstructor: ConstructorMirror;
 
     /** Gets the mirror for the superclass. */
-    readonly superClass: ClassMirror | undefined | null;
+    readonly superClass: ClassMirror | null;
 
     /** Gets a value indicating whether the class is extensible. */
     readonly extensible: boolean;
@@ -121,7 +121,7 @@ interface ClassMirror extends DeclarationMirror {
      * @param filter Options used to filter members.
      * @returns A MemberMirror for the named member if it exists; otherwise, undefined.
      */
-    getMember(name: MemberName, filter?: ClassMemberFilter): MemberLikeMirror | undefined;
+    getMember(name: MemberName, filter?: ClassMemberFilter): ClassMemberLikeMirror | undefined;
 
     /**
      * Gets the members of a class.
@@ -131,7 +131,7 @@ interface ClassMirror extends DeclarationMirror {
      *
      * Members whose names are PrivateSlot objects will only be returned if the mirror's state is "declaration".
      */
-    getMembers(filter?: ClassMemberFilter): Iterable<MemberLikeMirror>;
+    getMembers(filter?: ClassMemberFilter): Iterable<ClassMemberLikeMirror>;
 
     /**
      * Deletes a named member member of a class.
@@ -173,16 +173,6 @@ interface ClassMirror extends DeclarationMirror {
     defineProperty(name: MemberName, descriptor: DataDescriptor): PropertyMirror;
 
     /**
-     * Defines a field on a class.
-     *
-     * @param name The name of the field.
-     * @param descriptor The descriptor for the field.
-     * @returns A FieldMirror for the field.
-     * @throws This method will throw an error if the mirror's current state is not "declaration".
-     */
-    defineField(name: MemberName, descriptor: FieldDescriptor): FieldMirror;
-
-    /**
      * Prevents extensions to the class.
      *
      * @returns true if extensions could be prevented; otherwise, false.
@@ -197,7 +187,7 @@ interface ClassMirror extends DeclarationMirror {
      * @returns The result of instantiating a new instance of the underlying class.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */
-    construct(argumentsList: ArrayLike<any> | Iterable<any>, newTarget?: any): any;
+    construct(argumentsList: Iterable<any>, newTarget?: any): any;
 
     /**
      * Gets an introspection (read-only) mirror for this mirror. (Inherited from Mirror)
@@ -283,6 +273,7 @@ interface ConstructorMirror extends DeclarationMirror {
      * Gets or sets the underlying function for the constructor.
      *
      * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
 
@@ -294,7 +285,7 @@ interface ConstructorMirror extends DeclarationMirror {
      * @returns The result of instantiating a new instance of the underlying class.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */
-    construct(argumentsList: ArrayLike<any> | Iterable<any>, newTarget?: any): any;
+    construct(argumentsList: Iterable<any>, newTarget?: any): any;
 
     /**
      * Gets an introspection (read-only) mirror for this mirror. (Inherited from Mirror)
@@ -386,6 +377,7 @@ interface MethodMirror extends MemberMirror {
      * Gets or sets the underlying function for the method.
      *
      * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
 
@@ -402,7 +394,7 @@ interface MethodMirror extends MemberMirror {
      * @returns The result of invoking the function.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */
-    apply(thisArgument: any, argumentsList: ArrayLike<any> | Iterable<any>): any;
+    apply(thisArgument: any, argumentsList: Iterable<any>): any;
 
     /**
      * Gets an introspection (read-only) mirror for this mirror. (Inherited from Mirror)
@@ -561,6 +553,7 @@ interface GetterMirror extends DeclarationMirror {
      * Gets or sets the underlying function for the get method.
      *
      * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
 
@@ -572,7 +565,7 @@ interface GetterMirror extends DeclarationMirror {
      * @returns The result of invoking the function.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */
-    apply(thisArgument: any, argumentsList: ArrayLike<any> | Iterable<any>): any;
+    apply(thisArgument: any, argumentsList: Iterable<any>): any;
 
     /**
      * Gets an introspection (read-only) mirror for this mirror. (Inherited from Mirror)
@@ -601,6 +594,7 @@ interface SetterMirror extends DeclarationMirror {
      * Gets or sets the underlying function for the set method.
      *
      * @throws Setting this property will throw an error if the mirror's current state is not "declaration".
+     * @throws Setting this property will throw an error if the value is not a function.
      */
     value: Function;
 
@@ -612,7 +606,7 @@ interface SetterMirror extends DeclarationMirror {
      * @returns The result of invoking the function.
      * @throws This method will throw an error if the mirror's current state is "declaration".
      */
-    apply(thisArgument: any, argumentsList: ArrayLike<any> | Iterable<any>): any;
+    apply(thisArgument: any, argumentsList: Iterable<any>): any;
 
     /**
      * Gets an introspection (read-only) mirror for this mirror. (Inherited from Mirror)
