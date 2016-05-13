@@ -492,7 +492,7 @@ interface PropertyMirror extends MemberMirror {
 
     /**
      * Gets the member this property shadows on its superclass, if one exists. (Inherited from
-     *      MemberMirror)
+     * MemberMirror)
      */
     getShadowedMember(): MemberMirror | undefined;
 
