@@ -1,7 +1,15 @@
 /// <reference path="mirrors.d.ts" />
 
+declare namespace Reflect {
+    function get(target: any, propertyKey: PropertyKey | PrivateSlot, receiver?: any): any;
+    function set(target: any, propertyKey: PropertyKey | PrivateSlot, value: any, receiver?: any): boolean;
+}
+
 /** A private slot defined on an object or class. */
 interface PrivateSlot {
+    /** Gets the name for this slot. */
+    readonly name: string | undefined;
+
     /**
      * Gets a value indicating whether the private slot is defined on the object.
      *
@@ -31,11 +39,6 @@ interface PrivateSlot {
      * @throws This method will throw an error if object is not an Object or is null.
      */
     setValue(object: Object, value: any): boolean;
-
-    /**
-     * Gets a debug-friendly string for the PrivateSlot.
-     */
-    toString(): string;
 }
 
 /** A Mirror for a class declaration or class expression. */
